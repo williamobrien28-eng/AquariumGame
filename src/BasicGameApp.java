@@ -38,11 +38,12 @@ public class BasicGameApp implements Runnable {
    public JPanel panel;
    
 	public BufferStrategy bufferStrategy;
-	public Image Fish1;
+
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Fish Fish;
+    private Fish BigFish;
 
 
    // Main method definition
@@ -62,9 +63,10 @@ public class BasicGameApp implements Runnable {
       setUpGraphics();
        
       //variable and objects
-      //create (construct) the objects needed for the game and load up 
-		Fish1 = Toolkit.getDefaultToolkit().getImage("Fish1.jpg"); //load the picture
-		Fish = new = fish (10,100);
+      //create (construct) the objects needed for the game and load up
+		Fish = new Fish (10,100);
+        BigFish = new Fish (100,75);
+         //load the picture
 
 
 	}// BasicGameApp()
@@ -92,7 +94,8 @@ public class BasicGameApp implements Runnable {
 	public void moveThings()
 	{
       //calls the move( ) code in the objects
-		fish.move();
+		Fish.move();
+        BigFish.move();
 
 	}
 	
@@ -144,6 +147,7 @@ public class BasicGameApp implements Runnable {
 
       //draw the image of the astronaut
 		g.drawImage(Fish.pic, Fish.xpos, Fish.ypos, Fish.width, Fish.height, null);
+        g.drawImage(BigFish.pic, BigFish.xpos, BigFish.ypos, BigFish.width, BigFish.height, null);
 
 		g.dispose();
 
