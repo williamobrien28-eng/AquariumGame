@@ -18,6 +18,7 @@ public class BigFish {
         public int height;
         public boolean isAlive;//a boolean to denote if the hero is alive or dead.
         public Image pic;
+        public Rectangle hitBox;
 
 
         // METHOD DEFINITION SECTION
@@ -32,11 +33,13 @@ public class BigFish {
             xpos = pXpos;
             ypos = pYpos;
             dx =10;
-            dy =10;
+            dy =15;
             width = 60;
             height = 60;
             isAlive = true;
             pic =  Toolkit.getDefaultToolkit().getImage("BigFish.png");
+            hitBox= new Rectangle(xpos, ypos, width, height);
+
 
         } // constructor
 
@@ -63,6 +66,7 @@ public class BigFish {
             }
             xpos = xpos + dx;
             ypos = ypos + dy;
+            hitBox= new Rectangle(xpos, ypos, width, height);
 
 
 

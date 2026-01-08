@@ -16,6 +16,7 @@ public class Fish {
     public int height;
     public boolean isAlive;//a boolean to denote if the hero is alive or dead.
     public Image pic;
+    public Rectangle hitBox;
 
 
     // METHOD DEFINITION SECTION
@@ -35,6 +36,7 @@ public class Fish {
         height = 60;
         isAlive = true;
         pic =  Toolkit.getDefaultToolkit().getImage("Fish1.jpg");
+        hitBox= new Rectangle(xpos,ypos,width,height);
 
     } // constructor
 
@@ -61,6 +63,8 @@ public class Fish {
         }
         xpos = xpos + dx;
         ypos = ypos + dy;
+        hitBox= new Rectangle(xpos,ypos,width,height);
+
 
 
 

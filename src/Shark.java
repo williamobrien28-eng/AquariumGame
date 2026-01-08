@@ -18,6 +18,8 @@ public class Shark {
     public int height;
     public boolean isAlive;//a boolean to denote if the hero is alive or dead.
     public Image pic;
+    public Rectangle hitBox;
+
 
 
     // METHOD DEFINITION SECTION
@@ -33,10 +35,11 @@ public class Shark {
         ypos = pYpos;
         dx = 10;
         dy = 0;
-        width = 100;
-        height = 100;
+        width = 150;
+        height = 150;
         isAlive = true;
         pic = Toolkit.getDefaultToolkit().getImage("Shark.jpg");
+        hitBox= new Rectangle(xpos, ypos, width, height);
 
     } // constructor
 
@@ -61,6 +64,7 @@ public class Shark {
         }
         xpos = xpos + dx;
         ypos = ypos + dy;
+        hitBox= new Rectangle(xpos, ypos, width, height);
 
 
     }
