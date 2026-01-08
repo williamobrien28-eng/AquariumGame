@@ -36,7 +36,7 @@ public class BigFish {
             width = 60;
             height = 60;
             isAlive = true;
-            pic =  Toolkit.getDefaultToolkit().getImage("BigFish.jpg");
+            pic =  Toolkit.getDefaultToolkit().getImage("BigFish.png");
 
         } // constructor
 

@@ -43,7 +43,8 @@ public class BasicGameApp implements Runnable {
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Fish Fish;
-    private Fish BigFish;
+    private BigFish BigFish;
+    private Shark Shark;
 
 
    // Main method definition
@@ -65,7 +66,8 @@ public class BasicGameApp implements Runnable {
       //variable and objects
       //create (construct) the objects needed for the game and load up
 		Fish = new Fish (10,100);
-        BigFish = new Fish (100,75);
+        BigFish = new BigFish (100,75);
+        Shark = new Shark (500,200);
          //load the picture
 
 
@@ -96,6 +98,7 @@ public class BasicGameApp implements Runnable {
       //calls the move( ) code in the objects
 		Fish.move();
         BigFish.move();
+        Shark.move();
 
 	}
 	
@@ -148,7 +151,7 @@ public class BasicGameApp implements Runnable {
       //draw the image of the astronaut
 		g.drawImage(Fish.pic, Fish.xpos, Fish.ypos, Fish.width, Fish.height, null);
         g.drawImage(BigFish.pic, BigFish.xpos, BigFish.ypos, BigFish.width, BigFish.height, null);
-
+        g.drawImage(Shark.pic, Shark.xpos, Shark.ypos, Shark.width, Shark.height, null);
 		g.dispose();
 
 		bufferStrategy.show();
