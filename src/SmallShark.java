@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Shark {
+public class SmallShark {
 
     /**
      * Created by chales on 11/6/2017.
@@ -21,41 +21,47 @@ public class Shark {
     public Rectangle hitBox;
 
 
+    // METHOD DEFINITION SECTION
 
-    
+    // Constructor Definition
+    // A constructor builds the object when called and sets variable values.
 
 
-
-    public Shark(int pXpos, int pYpos) {
+    //This is a SECOND constructor that takes 3 parameters.  This allows us to specify the hero's name and position when we build it.
+    // if you put in a String, an int and an int the program will use this constructor instead of the one above.
+    public SmallShark(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx = 10;
-        dy = 0;
-        width = 150;
-        height = 150;
+        dx =15;
+        dy =15;
+        width = 45;
+        height = 45;
         isAlive = true;
-        pic = Toolkit.getDefaultToolkit().getImage("Shark.jpg");
+        pic =  Toolkit.getDefaultToolkit().getImage("SmallShark.png");
         hitBox= new Rectangle(xpos, ypos, width, height);
+
 
     } // constructor
 
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
     public void move() {
 
-        if (xpos >= 950 - width) {
-            xpos = 50;
+        if(xpos >= 1000-width){
+            dx=-dx;
+
 
         }
-
-        if (xpos <= 0) {
-            xpos = 850;
+        if (xpos <= 0){
+            dx=-dx;
 
         }
-        if (ypos <= 0) {
-            ypos = 1000;
+        if (ypos >=700-height){
+            dy=-dy;
+
+
         }
-        if (ypos >= 700 - height) {
-            ypos = 1;
+        if (ypos <= 0){
+            dy=-dy;
 
         }
         xpos = xpos + dx;
@@ -63,15 +69,8 @@ public class Shark {
         hitBox= new Rectangle(xpos, ypos, width, height);
 
 
+
     }
+
 }
-
-
-
-
-
-
-
-
-
 

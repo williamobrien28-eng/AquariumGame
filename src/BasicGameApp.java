@@ -46,6 +46,9 @@ public class BasicGameApp implements Runnable {
     private Fish Fish;
     private BigFish BigFish;
     private Shark Shark;
+    private FishFood FishFood;
+    private Poison Poison;
+    private SmallShark SmallShark;
 
 
     // Main method definition
@@ -73,11 +76,14 @@ public class BasicGameApp implements Runnable {
 
         //variable and objects
         //create (construct) the objects needed for the game and load up
-        backGroundPic = Toolkit.getDefaultToolkit().getImage("Ocean.jpeg");//load the picture
+        backGroundPic = Toolkit.getDefaultToolkit().getImage("Ocean.jpg");//load the picture
         Fish = new Fish(randx, randy);
         BigFish = new BigFish(randx, randy);
         Shark = new Shark(randx, 200);
-        //load the picture
+        FishFood = new FishFood (150,650);
+        Poison = new Poison(300,450);
+        SmallShark = new SmallShark(randx,randy);
+
 
 
     }// BasicGameApp()
@@ -86,18 +92,16 @@ public class BasicGameApp implements Runnable {
 //*******************************************************************************
 //User Method Section
 //
-// put your code to do things here.
 
-    // main thread
     // this is the code that plays the game after you set things up
     public void run() {
 
-        //for the moment we will loop things forever.
+
         while (true) {
 
             moveThings();  //move all the game objects
             render();  // paint the graphics
-            pause(20); // sleep for 10 ms
+            pause(20);
         }
     }
 
@@ -108,25 +112,59 @@ public class BasicGameApp implements Runnable {
         BigFish.move();
         Shark.move();
         crashing();
+        SmallShark.move();
 
     }
 
     public void crashing() {
-        //check to see if my astros crash into eachother
-        if (Shark.hitBox.intersects(BigFish.hitBox) && BigFish.isAlive == true) {
+        //check to see if my fish crash into eachother
+        if (Shark.hitBox.intersects(BigFish.hitBox) && BigFish.isAlive == true && Shark.isAlive == true) {
             System.out.println("CRASH!!!");
             Shark.dy = -Shark.dy;
             BigFish.dy = -BigFish.dy;
             BigFish.isAlive = false;
 
         }
-        if (Shark.hitBox.intersects(Fish.hitBox) && Fish.isAlive == true) {
+        //can make fish dissapear if they are hitting eachother
+        if (Shark.hitBox.intersects(Fish.hitBox) && Fish.isAlive == true && Shark.isAlive == true) {
             System.out.println("CRASH!!!");
             Shark.dy = -Shark.dy;
             Fish.dy = -Fish.dy;
             Fish.isAlive = false;
-
         }
+        //makes it so that fish can come back to life if he hits the food
+        if (FishFood.hitBox.intersects(Fish.hitBox) && Fish.isAlive == false &&FishFood.isAlive == true){
+            System.out.println("BANG");
+            Fish.dy=-Fish.dy;
+            Fish.isAlive = true;
+        }
+        //makes it so the bigfish can come back to life if it hits the food
+        if (FishFood.hitBox.intersects(BigFish.hitBox) && BigFish.isAlive == false && FishFood.isAlive == true){
+            System.out.println("CLANG");
+            BigFish.dy=-BigFish.dy;
+            BigFish.isAlive = true;
+        }
+        //poison kills the shark :):)
+        if (Poison.hitBox.intersects(BigFish.hitBox) && Shark.isAlive == true && BigFish.isAlive == true){
+            BigFish.dy=-BigFish.dy;
+            Shark.isAlive = false;
+        }
+        // now both fish can eleiminate shark
+        if (Poison.hitBox.intersects(Fish.hitBox) && Shark.isAlive == true && Fish.isAlive == true){
+            Fish.dy=-Fish.dy;
+            Shark.isAlive = false;
+        }
+        if (SmallShark.hitBox.intersects(FishFood.hitBox) ){
+            SmallShark.dy=-SmallShark.dy;
+            FishFood.isAlive = false;
+            Shark.isAlive = true;
+        }
+        if (SmallShark.hitBox.intersects(Poison.hitBox) ){
+            SmallShark.dy=-SmallShark.dy;
+            SmallShark.isAlive = false;
+        }
+
+
 
 
     }
@@ -177,13 +215,22 @@ public class BasicGameApp implements Runnable {
     private void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT);
+        g.drawImage(backGroundPic, 0, 0, WIDTH, HEIGHT,null);
 
         //draw the image of the astronaut
+        //makes it so fish can die
         if (Fish.isAlive == true){
         g.drawImage(Fish.pic, Fish.xpos, Fish.ypos, Fish.width, Fish.height, null);}
+        // makes it so fish can die
         if (BigFish.isAlive == true){
         g.drawImage(BigFish.pic, BigFish.xpos, BigFish.ypos, BigFish.width, BigFish.height, null);}
-        g.drawImage(Shark.pic, Shark.xpos, Shark.ypos, Shark.width, Shark.height, null);
+        if (Shark.isAlive == true){
+        g.drawImage(Shark.pic, Shark.xpos, Shark.ypos, Shark.width, Shark.height, null);}
+        if (FishFood.isAlive == true){
+        g.drawImage(FishFood.pic, FishFood.xpos, FishFood.ypos, FishFood.width, FishFood.height, null);}
+        g.drawImage(Poison.pic, Poison.xpos, Poison.ypos, Poison.width, Poison.height, null);
+        if (SmallShark.isAlive ==true){
+        g.drawImage(SmallShark.pic, SmallShark.xpos, SmallShark.ypos, SmallShark.width, SmallShark.height, null);}
         //g.drawRect(BigFish.hitBox.x, BigFish.hitBox.y, BigFish.hitBox.width, BigFish.hitBox.height);
         // g.drawRect(Shark.hitBox.x, Shark.hitBox.y, Shark.hitBox.width, Shark.hitBox.height);
         g.dispose();
