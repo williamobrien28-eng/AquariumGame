@@ -49,6 +49,8 @@ public class BasicGameApp implements Runnable {
     private FishFood FishFood;
     private Poison Poison;
     private SmallShark SmallShark;
+    private FishWin FishWin;
+    private SharksWin SharksWin;
 
 
     // Main method definition
@@ -83,6 +85,8 @@ public class BasicGameApp implements Runnable {
         FishFood = new FishFood (150,650);
         Poison = new Poison(300,450);
         SmallShark = new SmallShark(randx,randy);
+        FishWin = new FishWin(250,100);
+        SharksWin = new SharksWin(250,100);
 
 
 
@@ -162,7 +166,14 @@ public class BasicGameApp implements Runnable {
         if (SmallShark.hitBox.intersects(Poison.hitBox) ){
             SmallShark.dy=-SmallShark.dy;
             SmallShark.isAlive = false;
+        } // displays simbol if fish win
+        if (FishWin.hitBox.intersects(Poison.hitBox) && Shark.isAlive == false && SmallShark.isAlive == false){
+            FishWin.isAlive = true;
+        } //displays symbol if sharks win
+        if (Shark.hitBox.intersects(SharksWin.hitBox) && Fish.isAlive == false && BigFish.isAlive == false && FishFood.isAlive == false){
+            SharksWin.isAlive = true;
         }
+
 
 
 
@@ -231,6 +242,11 @@ public class BasicGameApp implements Runnable {
         g.drawImage(Poison.pic, Poison.xpos, Poison.ypos, Poison.width, Poison.height, null);
         if (SmallShark.isAlive ==true){
         g.drawImage(SmallShark.pic, SmallShark.xpos, SmallShark.ypos, SmallShark.width, SmallShark.height, null);}
+        if (FishWin.isAlive == true){
+        g.drawImage(FishWin.pic, FishWin.xpos, FishWin.ypos, FishWin.width, FishWin.height, null);}
+        if (SharksWin.isAlive == true){
+            g.drawImage(SharksWin.pic, SharksWin.xpos, SharksWin.ypos, SharksWin.width, SharksWin.height, null);}
+
         //g.drawRect(BigFish.hitBox.x, BigFish.hitBox.y, BigFish.hitBox.width, BigFish.hitBox.height);
         // g.drawRect(Shark.hitBox.x, Shark.hitBox.y, Shark.hitBox.width, Shark.hitBox.height);
         g.dispose();
