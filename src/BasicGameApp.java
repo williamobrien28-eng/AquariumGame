@@ -79,8 +79,8 @@ public class BasicGameApp implements Runnable {
         //variable and objects
         //create (construct) the objects needed for the game and load up
         backGroundPic = Toolkit.getDefaultToolkit().getImage("Ocean.jpg");//load the picture
-        Fish = new Fish(randx, randy);
-        BigFish = new BigFish(randx, randy);
+        Fish = new Fish(200, randy);
+        BigFish = new BigFish(randx, 450);
         Shark = new Shark(randx, 200);
         FishFood = new FishFood (150,650);
         Poison = new Poison(300,450);
@@ -152,11 +152,13 @@ public class BasicGameApp implements Runnable {
         if (Poison.hitBox.intersects(BigFish.hitBox) && Shark.isAlive == true && BigFish.isAlive == true){
             BigFish.dy=-BigFish.dy;
             Shark.isAlive = false;
+            SmallShark.isAlive = false;
         }
         // now both fish can eleiminate shark
         if (Poison.hitBox.intersects(Fish.hitBox) && Shark.isAlive == true && Fish.isAlive == true){
             Fish.dy=-Fish.dy;
             Shark.isAlive = false;
+            SmallShark.isAlive = false;
         }
         if (SmallShark.hitBox.intersects(FishFood.hitBox) ){
             SmallShark.dy=-SmallShark.dy;
@@ -170,8 +172,27 @@ public class BasicGameApp implements Runnable {
         if (FishWin.hitBox.intersects(Poison.hitBox) && Shark.isAlive == false && SmallShark.isAlive == false){
             FishWin.isAlive = true;
         } //displays symbol if sharks win
-        if (Shark.hitBox.intersects(SharksWin.hitBox) && Fish.isAlive == false && BigFish.isAlive == false && FishFood.isAlive == false){
+        if (SharksWin.hitBox.intersects(Poison.hitBox) && Fish.isAlive == false && BigFish.isAlive == false && FishFood.isAlive == false){
             SharksWin.isAlive = true;
+        }// everything disapears so only win screen is visible
+        if (FishWin.isAlive == true){
+            Fish.isAlive=false;
+            BigFish.isAlive=false;
+            FishFood.isAlive=false;
+        }// only win screen is visible
+        if (SharksWin.isAlive == true){
+            Shark.isAlive = false;
+            SmallShark.isAlive = false;
+            Poison.isAlive = false;
+        }
+        if (Fish.hitBox.intersects((BigFish.hitBox))){
+            Fish.dx=-Fish.dx;
+            BigFish.dx=-BigFish.dx;
+        }
+        if (Shark.hitBox.intersects((SmallShark.hitBox))){
+            Shark.dy=-Shark.dy;
+            SmallShark.dy=-SmallShark.dy;
+            SmallShark.dx=-SmallShark.dx;
         }
 
 
@@ -236,8 +257,10 @@ public class BasicGameApp implements Runnable {
         if (BigFish.isAlive == true){
         g.drawImage(BigFish.pic, BigFish.xpos, BigFish.ypos, BigFish.width, BigFish.height, null);}
         if (Shark.isAlive == true){
+            //sharl can die
         g.drawImage(Shark.pic, Shark.xpos, Shark.ypos, Shark.width, Shark.height, null);}
         if (FishFood.isAlive == true){
+            //all these if statements mean that things wont draw
         g.drawImage(FishFood.pic, FishFood.xpos, FishFood.ypos, FishFood.width, FishFood.height, null);}
         g.drawImage(Poison.pic, Poison.xpos, Poison.ypos, Poison.width, Poison.height, null);
         if (SmallShark.isAlive ==true){
@@ -254,3 +277,4 @@ public class BasicGameApp implements Runnable {
         bufferStrategy.show();
     }
 }
+
