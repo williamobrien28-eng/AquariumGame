@@ -67,6 +67,11 @@ public class BasicGameApp implements Runnable {
     // Initialize your variables and construct your program objects here.
     public BasicGameApp() {
 
+
+
+
+
+
         setUpGraphics();
         // random spot for fish to appear
         int randx = (int)(Math.random()*10) +1;
@@ -83,10 +88,10 @@ public class BasicGameApp implements Runnable {
         BigFish = new BigFish(randx, 450);
         Shark = new Shark(randx, 200);
         FishFood = new FishFood (150,650);
-        Poison = new Poison(300,450);
+        Poison = new Poison(600,670);
         SmallShark = new SmallShark(randx,randy);
-        FishWin = new FishWin(250,100);
         SharksWin = new SharksWin(250,100);
+        FishWin = new FishWin(250,100);
 
 
 
@@ -150,31 +155,35 @@ public class BasicGameApp implements Runnable {
         }
         //poison kills the shark :):)
         if (Poison.hitBox.intersects(BigFish.hitBox) && Shark.isAlive == true && BigFish.isAlive == true){
-            BigFish.dy=-BigFish.dy;
             Shark.isAlive = false;
             SmallShark.isAlive = false;
+            Poison.isAlive = false;
+            FishWin.isAlive = true;
         }
         // now both fish can eleiminate shark
-        if (Poison.hitBox.intersects(Fish.hitBox) && Shark.isAlive == true && Fish.isAlive == true){
-            Fish.dy=-Fish.dy;
+        if (Poison.hitBox.intersects(Fish.hitBox) && Shark.isAlive == true && Fish.isAlive == true ){
             Shark.isAlive = false;
             SmallShark.isAlive = false;
+            Poison.isAlive = false;
+            FishWin.isAlive = true;
+
         }
-        if (SmallShark.hitBox.intersects(FishFood.hitBox) ){
+        if (SmallShark.hitBox.intersects(FishFood.hitBox) && SmallShark.isAlive == true){
             SmallShark.dy=-SmallShark.dy;
             FishFood.isAlive = false;
             Shark.isAlive = true;
         }
         if (SmallShark.hitBox.intersects(Poison.hitBox) ){
-            SmallShark.dy=-SmallShark.dy;
             SmallShark.isAlive = false;
-        } // displays simbol if fish win
-        if (FishWin.hitBox.intersects(Poison.hitBox) && Shark.isAlive == false && SmallShark.isAlive == false){
-            FishWin.isAlive = true;
-        } //displays symbol if sharks win
-        if (SharksWin.hitBox.intersects(Poison.hitBox) && Fish.isAlive == false && BigFish.isAlive == false && FishFood.isAlive == false){
+        }  //displays symbol if sharks win
+        // displays simbol if fish win
+        if (FishWin.isAlive == false && Shark.isAlive == false && SmallShark.isAlive== false && Poison.isAlive == false){
+            FishWin.isAlive = true;}
+        if (SharksWin.isAlive == false && Fish.isAlive == false && BigFish.isAlive== false && FishFood.isAlive == false){
             SharksWin.isAlive = true;
-        }// everything disapears so only win screen is visible
+        }
+
+        // everything disapears so only win screen is visible
         if (FishWin.isAlive == true){
             Fish.isAlive=false;
             BigFish.isAlive=false;
@@ -262,7 +271,8 @@ public class BasicGameApp implements Runnable {
         if (FishFood.isAlive == true){
             //all these if statements mean that things wont draw
         g.drawImage(FishFood.pic, FishFood.xpos, FishFood.ypos, FishFood.width, FishFood.height, null);}
-        g.drawImage(Poison.pic, Poison.xpos, Poison.ypos, Poison.width, Poison.height, null);
+        if (Poison.isAlive == true){
+        g.drawImage(Poison.pic, Poison.xpos, Poison.ypos, Poison.width, Poison.height, null);}
         if (SmallShark.isAlive ==true){
         g.drawImage(SmallShark.pic, SmallShark.xpos, SmallShark.ypos, SmallShark.width, SmallShark.height, null);}
         if (FishWin.isAlive == true){
