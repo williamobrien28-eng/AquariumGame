@@ -34,8 +34,8 @@ public class Poison  {
         ypos = pYpos;
         dx =0;
         dy =0;
-        width = 40;
-        height = 40;
+        width = 30;
+        height = 30;
         isAlive = true;
         pic =  Toolkit.getDefaultToolkit().getImage("Poison.jpg");
         hitBox= new Rectangle(xpos, ypos, width, height);

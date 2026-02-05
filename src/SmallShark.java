@@ -32,8 +32,8 @@ public class SmallShark {
     public SmallShark(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx =7;
-        dy =7;
+        dx =15;
+        dy =15;
         width = 25;
         height = 25;
         isAlive = true;

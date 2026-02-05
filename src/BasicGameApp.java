@@ -87,11 +87,12 @@ public class BasicGameApp implements Runnable {
         Fish = new Fish(200, randy);
         BigFish = new BigFish(randx, 450);
         Shark = new Shark(randx, 200);
-        FishFood = new FishFood (150,650);
-        Poison = new Poison(600,670);
+        FishFood = new FishFood (150,600);
+        Poison = new Poison(600,600);
         SmallShark = new SmallShark(randx,randy);
         SharksWin = new SharksWin(250,100);
         FishWin = new FishWin(250,100);
+
 
 
 
@@ -161,23 +162,24 @@ public class BasicGameApp implements Runnable {
             FishWin.isAlive = true;
         }
         // now both fish can eleiminate shark
-        if (Poison.hitBox.intersects(Fish.hitBox) && Shark.isAlive == true && Fish.isAlive == true ){
+        if (Poison.hitBox.intersects(Fish.hitBox) ){
             Shark.isAlive = false;
             SmallShark.isAlive = false;
             Poison.isAlive = false;
             FishWin.isAlive = true;
 
         }
+        //can make sharks win be getting rid of the fish food
         if (SmallShark.hitBox.intersects(FishFood.hitBox) && SmallShark.isAlive == true){
             SmallShark.dy=-SmallShark.dy;
             FishFood.isAlive = false;
-            Shark.isAlive = true;
         }
+        //kills smallshark
         if (SmallShark.hitBox.intersects(Poison.hitBox) ){
             SmallShark.isAlive = false;
         }  //displays symbol if sharks win
         // displays simbol if fish win
-        if (FishWin.isAlive == false && Shark.isAlive == false && SmallShark.isAlive== false && Poison.isAlive == false){
+        if (FishWin.isAlive == false && Shark.isAlive == false && SmallShark.isAlive== false ){
             FishWin.isAlive = true;}
         if (SharksWin.isAlive == false && Fish.isAlive == false && BigFish.isAlive== false && FishFood.isAlive == false){
             SharksWin.isAlive = true;
@@ -188,20 +190,27 @@ public class BasicGameApp implements Runnable {
             Fish.isAlive=false;
             BigFish.isAlive=false;
             FishFood.isAlive=false;
+            SharksWin.isAlive=false;
         }// only win screen is visible
         if (SharksWin.isAlive == true){
             Shark.isAlive = false;
             SmallShark.isAlive = false;
             Poison.isAlive = false;
+            Fish.isAlive=false;
         }
+        //makes fish bounce off of eachother
         if (Fish.hitBox.intersects((BigFish.hitBox))){
             Fish.dx=-Fish.dx;
             BigFish.dx=-BigFish.dx;
         }
+        //sharks bounce off of eachother
         if (Shark.hitBox.intersects((SmallShark.hitBox))){
             Shark.dy=-Shark.dy;
             SmallShark.dy=-SmallShark.dy;
             SmallShark.dx=-SmallShark.dx;
+        }
+        if (SmallShark.hitBox.intersects(FishFood.hitBox)){
+            SharksWin.isAlive=true;
         }
 
 
