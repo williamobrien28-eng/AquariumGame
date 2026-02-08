@@ -87,10 +87,10 @@ public class BasicGameApp implements Runnable {
         Fish = new Fish(200, randy);
         BigFish = new BigFish(randx, 450);
         Shark = new Shark(randx, 200);
-        FishFood = new FishFood (150,600);
+        FishFood = new FishFood (150,550);
         Poison = new Poison(600,600);
         SmallShark = new SmallShark(randx,randy);
-        SharksWin = new SharksWin(250,100);
+        SharksWin = new SharksWin(700,100);
         FishWin = new FishWin(250,100);
 
 
@@ -162,7 +162,7 @@ public class BasicGameApp implements Runnable {
             FishWin.isAlive = true;
         }
         // now both fish can eleiminate shark
-        if (Poison.hitBox.intersects(Fish.hitBox) ){
+        if (Poison.hitBox.intersects(Fish.hitBox)&& Fish.isAlive == true ){
             Shark.isAlive = false;
             SmallShark.isAlive = false;
             Poison.isAlive = false;
@@ -173,6 +173,13 @@ public class BasicGameApp implements Runnable {
         if (SmallShark.hitBox.intersects(FishFood.hitBox) && SmallShark.isAlive == true){
             SmallShark.dy=-SmallShark.dy;
             FishFood.isAlive = false;
+        }
+        //sharks win
+        if (SmallShark.hitBox.intersects(FishFood.hitBox) && SmallShark.isAlive == true && Fish.isAlive == false && BigFish.isAlive == false){
+            SmallShark.dy=-SmallShark.dy;
+            FishFood.isAlive = false;
+            SharksWin.isAlive = true;
+            FishWin.isAlive = false;
         }
         //kills smallshark
         if (SmallShark.hitBox.intersects(Poison.hitBox) ){
@@ -211,6 +218,13 @@ public class BasicGameApp implements Runnable {
         }
         if (SmallShark.hitBox.intersects(FishFood.hitBox)){
             SharksWin.isAlive=true;
+        }
+
+        if (SharksWin.isAlive == true){
+            System.out.println("Sharks Win");
+        }
+        if (FishWin.isAlive == true){
+            System.out.println("Fish Win");
         }
 
 
