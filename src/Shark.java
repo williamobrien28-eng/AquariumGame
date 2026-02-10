@@ -19,6 +19,7 @@ public class Shark {
     public boolean isAlive;//a boolean to denote if the hero is alive or dead.
     public Image pic;
     public Rectangle hitBox;
+    public int health;
 
 
 
@@ -36,6 +37,8 @@ public class Shark {
         isAlive = true;
         pic = Toolkit.getDefaultToolkit().getImage("Shark.jpg");
         hitBox= new Rectangle(xpos, ypos, width, height);
+        health = 15;
+
 
     } // constructor
 

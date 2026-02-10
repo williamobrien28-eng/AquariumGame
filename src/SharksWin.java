@@ -41,6 +41,8 @@ public class SharksWin {
         hitBox= new Rectangle(xpos, ypos, width, height);
 
 
+
+
     } // constructor
 
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
@@ -48,6 +50,8 @@ public class SharksWin {
         xpos = xpos + dx;
         ypos = ypos + dy;
         hitBox= new Rectangle(xpos, ypos, width, height);
+
+
 
 
 

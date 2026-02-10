@@ -90,7 +90,7 @@ public class BasicGameApp implements Runnable {
         FishFood = new FishFood (150,550);
         Poison = new Poison(600,600);
         SmallShark = new SmallShark(randx,randy);
-        SharksWin = new SharksWin(700,100);
+        SharksWin = new SharksWin(250,100);
         FishWin = new FishWin(250,100);
 
 
@@ -130,17 +130,26 @@ public class BasicGameApp implements Runnable {
         //check to see if my fish crash into eachother
         if (Shark.hitBox.intersects(BigFish.hitBox) && BigFish.isAlive == true && Shark.isAlive == true) {
             System.out.println("CRASH!!!");
-            Shark.dy = -Shark.dy;
             BigFish.dy = -BigFish.dy;
             BigFish.isAlive = false;
+            Shark.health = Shark.health -1;
+            Shark.dx = Shark.dx +3;
+            System.out.println(Shark.health);
+
 
         }
         //can make fish dissapear if they are hitting eachother
         if (Shark.hitBox.intersects(Fish.hitBox) && Fish.isAlive == true && Shark.isAlive == true) {
             System.out.println("CRASH!!!");
-            Shark.dy = -Shark.dy;
             Fish.dy = -Fish.dy;
             Fish.isAlive = false;
+            Shark.health = Shark.health -1;
+            Shark.dx = Shark.dx +3;
+            System.out.println(Shark.health);
+        }
+        //shark can now die if it hits fish too many times (15 to be exact)
+        if (Shark.health == 0){
+            Shark.isAlive = false;
         }
         //makes it so that fish can come back to life if he hits the food
         if (FishFood.hitBox.intersects(Fish.hitBox) && Fish.isAlive == false &&FishFood.isAlive == true){
@@ -174,6 +183,16 @@ public class BasicGameApp implements Runnable {
             SmallShark.dy=-SmallShark.dy;
             FishFood.isAlive = false;
         }
+        if (SmallShark.hitBox.intersects(BigFish.hitBox)&& SmallShark.isAlive == true && BigFish.isAlive == true){
+            SmallShark.dx = SmallShark.dx + 2;
+            SmallShark.dy = SmallShark.dy + 2;
+
+        }
+        if (SmallShark.hitBox.intersects(Fish.hitBox)&&SmallShark.isAlive == true && Fish.isAlive == true){
+            SmallShark.dx = SmallShark.dx + 2;
+            SmallShark.dy = SmallShark.dy + 2;
+
+        }
         //sharks win
         if (SmallShark.hitBox.intersects(FishFood.hitBox) && SmallShark.isAlive == true && Fish.isAlive == false && BigFish.isAlive == false){
             SmallShark.dy=-SmallShark.dy;
@@ -193,39 +212,29 @@ public class BasicGameApp implements Runnable {
         }
 
         // everything disapears so only win screen is visible
-        if (FishWin.isAlive == true){
-            Fish.isAlive=false;
-            BigFish.isAlive=false;
-            FishFood.isAlive=false;
-            SharksWin.isAlive=false;
-        }// only win screen is visible
-        if (SharksWin.isAlive == true){
-            Shark.isAlive = false;
-            SmallShark.isAlive = false;
-            Poison.isAlive = false;
-            Fish.isAlive=false;
-        }
+       // only win screen is visible
+
         //makes fish bounce off of eachother
-        if (Fish.hitBox.intersects((BigFish.hitBox))){
+        if (Fish.hitBox.intersects((BigFish.hitBox))&& Fish.isAlive == true && BigFish.isAlive == true){
             Fish.dx=-Fish.dx;
             BigFish.dx=-BigFish.dx;
         }
         //sharks bounce off of eachother
-        if (Shark.hitBox.intersects((SmallShark.hitBox))){
-            Shark.dy=-Shark.dy;
+        if (Shark.hitBox.intersects((SmallShark.hitBox))&&Shark.isAlive == true){
             SmallShark.dy=-SmallShark.dy;
             SmallShark.dx=-SmallShark.dx;
         }
-        if (SmallShark.hitBox.intersects(FishFood.hitBox)){
-            SharksWin.isAlive=true;
-        }
 
+        //help with a bug
         if (SharksWin.isAlive == true){
+
             System.out.println("Sharks Win");
         }
+        //same thing here win screens were buggy
         if (FishWin.isAlive == true){
             System.out.println("Fish Win");
         }
+
 
 
 
