@@ -9,16 +9,15 @@ public class FishWin {
 
     //VARIABLE DECLARAT ION SECTION
     //Here's where you state which variables you are going to use.
-    public String name;                //holds the name of the hero
     public int xpos;                //the x position
     public int ypos;                //the y position
     public int dx;                    //the speed of the hero in the x direction
     public int dy;                    //the speed of the hero in the y direction
-    public int width;
-    public int height;
+    public int width; //width
+    public int height; //height
     public boolean isAlive;//a boolean to denote if the hero is alive or dead.
-    public Image pic;
-    public Rectangle hitBox;
+    public Image pic; //makes pic
+    public Rectangle hitBox; //makes hitbox
 
 
     // METHOD DEFINITION SECTION

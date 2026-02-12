@@ -9,7 +9,6 @@ public class Poison  {
 
     //VARIABLE DECLARAT ION SECTION
     //Here's where you state which variables you are going to use.
-    public String name;                //holds the name of the hero
     public int xpos;                //the x position
     public int ypos;                //the y position
     public int dx;                    //the speed of the hero in the x direction

@@ -203,10 +203,11 @@ public class BasicGameApp implements Runnable {
         //kills smallshark
         if (SmallShark.hitBox.intersects(Poison.hitBox) ){
             SmallShark.isAlive = false;
-        }  //displays symbol if sharks win
+        }
         // displays simbol if fish win
         if (FishWin.isAlive == false && Shark.isAlive == false && SmallShark.isAlive== false ){
             FishWin.isAlive = true;}
+        //displays symbol if sharks win
         if (SharksWin.isAlive == false && Fish.isAlive == false && BigFish.isAlive== false && FishFood.isAlive == false){
             SharksWin.isAlive = true;
         }

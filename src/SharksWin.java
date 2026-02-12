@@ -19,6 +19,7 @@ public class SharksWin {
     public boolean isAlive;//a boolean to denote if the hero is alive or dead.
     public Image pic;
     public Rectangle hitBox;
+    public Rectangle Health;
 
 
     // METHOD DEFINITION SECTION

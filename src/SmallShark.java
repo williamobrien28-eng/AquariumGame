@@ -18,7 +18,7 @@ public class SmallShark {
     public int height;
     public boolean isAlive;//a boolean to denote if the hero is alive or dead.
     public Image pic;
-    public Rectangle hitBox;
+    public Rectangle hitBox; //hitbox
 
 
     // METHOD DEFINITION SECTION
