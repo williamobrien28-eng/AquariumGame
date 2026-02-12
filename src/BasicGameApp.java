@@ -43,6 +43,7 @@ public class BasicGameApp implements Runnable {
 
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
+    //makes all of these characrters
     private Fish Fish;
     private BigFish BigFish;
     private Shark Shark;
@@ -84,13 +85,21 @@ public class BasicGameApp implements Runnable {
         //variable and objects
         //create (construct) the objects needed for the game and load up
         backGroundPic = Toolkit.getDefaultToolkit().getImage("Ocean.jpg");//load the picture
+        //makes the pictures and objects
         Fish = new Fish(200, randy);
+        //makes bigfish
         BigFish = new BigFish(randx, 450);
+        //makes shark
         Shark = new Shark(randx, 200);
+        //makes the fish food
         FishFood = new FishFood (150,550);
+        //makes the poison
         Poison = new Poison(600,600);
+        //makes the small shark
         SmallShark = new SmallShark(randx,randy);
+        //makes sharkswin
         SharksWin = new SharksWin(250,100);
+        //makes fishwin
         FishWin = new FishWin(250,100);
 
 
